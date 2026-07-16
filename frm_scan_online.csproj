@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3513611-4CE3-4A88-9CF2-5E234BBEF8F2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>frm_scan_online</RootNamespace>
+    <AssemblyName>File Scan Tool</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tray-icon-current.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Guna.UI2">
+      <HintPath>packages\Guna.UI2.WinForms.2.0.4.4\lib\net472\Guna.UI2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Models -->
+    <Compile Include="Models\ScanResult.cs" />
+    <Compile Include="Models\FileHashInfo.cs" />
+    <Compile Include="Models\ScanHistoryEntry.cs" />
+    <!-- Providers -->
+    <Compile Include="Providers\IScanProvider.cs" />
+    <Compile Include="Providers\VirusTotalProvider.cs" />
+    <Compile Include="Providers\MetaDefenderProvider.cs" />
+    <Compile Include="Providers\OpenTipProvider.cs" />
+    <Compile Include="Providers\Http\ProgressStreamContent.cs" />
+    <Compile Include="Providers\MissingApiKeyException.cs" />
+    <!-- UI -->
+    <Compile Include="UI\MainBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainBar.Designer.cs">
+      <DependentUpon>MainBar.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\MainBar.resx">
+      <DependentUpon>MainBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="UI\ResultPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ResultPanel.Designer.cs">
+      <DependentUpon>ResultPanel.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\ResultPanel.resx">
+      <DependentUpon>ResultPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="UI\ResultPanelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ResultPanelForm.Designer.cs">
+      <DependentUpon>ResultPanelForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\ResultPanelForm.resx">
+      <DependentUpon>ResultPanelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="UI\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DonateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DonateForm.Designer.cs">
+      <DependentUpon>DonateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\HistoryForm.Designer.cs">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ChecksumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ChecksumForm.Designer.cs">
+      <DependentUpon>ChecksumForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UrlScanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UrlScanForm.Designer.cs">
+      <DependentUpon>UrlScanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\BatchLookupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\BatchLookupForm.Designer.cs">
+      <DependentUpon>BatchLookupForm.cs</DependentUpon>
+    </Compile>
+    <!-- Bootstrapper -->
+    <Compile Include="Bootstrapper\DotNetBootstrapper.cs" />
+    <!-- Services -->
+    <Compile Include="Services\FileHasher.cs" />
+    <Compile Include="Services\SettingsStore.cs" />
+    <Compile Include="Services\StartupRegistration.cs" />
+    <Compile Include="Services\BrowserLauncher.cs" />
+    <Compile Include="Services\QuarantineStore.cs" />
+    <Compile Include="Services\SignatureChecker.cs" />
+    <Compile Include="Services\ScanHistoryStore.cs" />
+    <Compile Include="Services\UpdateChecker.cs" />
+    <Compile Include="Services\ArchiveChecker.cs" />
+    <Compile Include="Services\HttpClientFactory.cs" />
+    <Compile Include="Services\QuotaInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Donate QR images - embedded into the assembly, loaded via Assembly.GetManifestResourceStream in DonateForm.cs -->
+    <EmbeddedResource Include="Assets\tcb.jpg" />
+    <EmbeddedResource Include="Assets\momo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tray-icon-current.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

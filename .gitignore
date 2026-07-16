@@ -1,0 +1,12 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Ban sao App.config chua key that - KHONG duoc push len GitHub
+App.config.mykeys.bak
+*.mykeys.bak
