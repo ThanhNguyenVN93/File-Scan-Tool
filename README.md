@@ -9,6 +9,8 @@ up right in the app.
 ![Platform](https://img.shields.io/badge/platform-Windows%207%20SP1%2B-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+**[⬇ Download the latest release](../../releases/latest)** — single portable `.exe`, no installer needed.
+
 ## Features
 
 - **Multi-source scanning** — pick one source per scan (VirusTotal / MetaDefender / OpenTIP); no
@@ -35,7 +37,8 @@ up right in the app.
 
 - Windows 7 SP1 or later
 - .NET Framework 4.7.2 or later (the app will offer to install it automatically if missing)
-- Free API keys from the sources you want to use:
+- A free API key from **at least one** of the sources below — you only need one to start scanning,
+  not all three (pick whichever you sign up for and select it in the app's dropdown):
   - [VirusTotal](https://www.virustotal.com/gui/my-apikey)
   - [MetaDefender Cloud](https://my.opswat.com/)
   - [Kaspersky OpenTIP](https://opentip.kaspersky.com/token)
@@ -43,9 +46,14 @@ up right in the app.
 ## Getting started
 
 1. Download the latest release from the [Releases](../../releases) page and run `File Scan Tool.exe`.
-2. Right-click the pill → **API key settings...** and paste in the API key(s) for whichever source(s)
-   you plan to use.
-3. Select a file (click the path field or drag & drop), pick a source, and click **Scan**.
+2. **Windows may show a "Windows protected your PC" SmartScreen warning** the first time you run it —
+   this is expected for any new, unsigned executable (this project doesn't currently have a paid code
+   signing certificate). Click **More info**, then **Run anyway** to continue. Your browser may show a
+   similar "not commonly downloaded" warning when saving the file; choose **Keep**/**Keep anyway**.
+3. Right-click the pill → **API key settings...** and paste in the API key for whichever *one* source
+   you signed up for (see Requirements above — you don't need all three).
+4. Select a file (click the path field or drag & drop), pick that source in the dropdown, and click
+   **Scan**.
 
 No installer is required — it's a single portable executable. Keys are stored locally and encrypted;
 nothing is sent anywhere except to the scanning source you explicitly choose.
@@ -59,8 +67,10 @@ restore for `Guna.UI2.WinForms` and `Newtonsoft.Json`.
 msbuild frm_scan_online.csproj /p:Configuration=Release
 ```
 
-The build output is a single self-contained executable (no separate DLLs need to ship alongside it
-other than what's already produced in the output folder).
+This produces `File Scan Tool.exe` plus two small dependency DLLs (`Guna.UI2.dll`,
+`Newtonsoft.Json.dll`) in `bin\Release\` — all three need to sit together to run. The single
+portable `.exe` attached to each GitHub Release is that same build merged into one file with
+[ILRepack](https://github.com/gluck/il-repack).
 
 ## Privacy notes
 
